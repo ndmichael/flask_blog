@@ -1,0 +1,28 @@
+{% extends "base.html"  %}
+
+{% block content %}
+<div class="container py-5">
+    <section class="row g-5">
+        <article class="col-12 col-md-8 mx-auto text-center">
+            {% if post %}
+                <header class=" display-2">{{post.title}}</header>
+                <div class="d-flex justify-content-between py-5">
+                    <p class="fw-bold text-primary">{{post.author.username}}</p>
+                    {% if post.author == current_user %}
+                    <p><a class="btn btn-info" href="{{url_for('update_post', post_id=post.id)}}">Update post</a></p>
+                    {% endif %}
+                    <p class="text-muted">{{post.date_posted.strftime('%d-%b-%Y')}}</p>
+                </div>
+                <div>
+                    <p class="fs-4">
+                        {{post.content}}
+                    </p>
+                </div>
+            {% else %}
+                <div><h1>404 POST NOT FOUND</h1></div>
+            {% endif %}
+        </article>
+    </section>
+</div>
+
+{% endblock content %}

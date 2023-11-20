@@ -1,0 +1,33 @@
+{% extends "base.html"  %}
+
+{% block content %}
+<div class="container py-5">
+    <section class="row g-5">
+        {% if blogs %}
+        {% for blog in blogs %}
+            <div class="col-12 col-md-6">
+                <div class="p-5 shadow rounded-4">
+                    <a href="{{url_for('post_details', id=blog.id)}}"><h2>{{blog.title}}</h2></a> 
+                    <div class="my-4">
+                        <img class=" img-fluid shadow" src="/static/images/{{blog.image}}" alt="">
+                    </div>
+                    <p class="py-4">{{blog.content|safe|truncate(150)}}</p>
+                    <div class="d-flex justify-content-between">
+                        <small class="fw-bold text-primary">{{blog.author.username}}</small>
+                        <small class="text-muted">{{blog.date_posted.strftime('%d-%b-%Y')}}</small>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+        {% else %}
+            <div class="col-12 col-md-6 text-center mx-auto">
+                <h2>No blogs Post</h2>
+                <p>Be the first to create post</p>
+                <a href="{{url_for('create_post')}}">CREATE POST</a>
+                
+            </div>
+        {% endif %}
+    </section>
+</div>
+
+{% endblock content %}
