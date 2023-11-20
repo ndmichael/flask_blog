@@ -4,8 +4,21 @@ from fblog import app, db, bcrypt
 from fblog.models import User, Post
 from flask_login import login_user, logout_user, login_required, current_user
 from sqlalchemy import desc
+from secrets import token_hex
+import os
 
 
+
+def save_picture(form_picture):
+    # return form_picture
+    random_hex = token_hex(3)
+    fname, fext = os.path.splitext(form_picture.filename)
+    picture_file = fname + random_hex + fext
+    pic_path = os.path.join(app.root_path, 'static/images', picture_file)
+    form_picture.save(pic_path)
+    return picture_file
+
+    
 
 #index route
 @app.route("/")
@@ -37,9 +50,15 @@ def create_post():
         return redirect(url_for('login'))
     form = CreatePost()
     if form.validate_on_submit():
-        post = Post(title=form.title.data, content=form.content.data, author=current_user)
-        db.session.add(post)
-        db.session.commit() 
+        # image_file = save_picture(form.image.data.filename)
+        # print(image_file)
+        if form.image.data:
+            print(form.image.data)
+            image_file = save_picture(form.image.data)
+            print(image_file)
+            post = Post(title=form.title.data, content=form.content.data, image=image_file, author=current_user)
+            db.session.add(post)
+            db.session.commit() 
         flash(f'post created {form.title.data}', 'success')
         return redirect(url_for('index'))
     return render_template("create_post.html", form=form, title="new post")
