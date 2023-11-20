@@ -9,7 +9,7 @@
                 <div class="p-5 shadow rounded-4">
                     <a href="{{url_for('post_details', id=blog.id)}}"><h2>{{blog.title}}</h2></a> 
                     <div class="my-4">
-                        <img class=" img-fluid shadow" src="/static/images/{{blog.image}}" alt="">
+                        <img class=" img-fluid shadow w-100" src="/static/images/{{blog.image}}" alt="" style="height: 300px; object-fit: cover;">
                     </div>
                     <p class="py-4">{{blog.content|safe|truncate(150)}}</p>
                     <div class="d-flex justify-content-between">
