@@ -1,0 +1,21 @@
+.navbar-expand-lg {
+    background: #0082fc;
+    padding: 10px !important;
+  }
+
+
+  .nav-link{
+    color: #fff;
+    font-size: 14px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-right: 20px !important;
+    font-weight: bold;
+    font-family: 'Quicksand', sans-serif;
+  }
+
+  .nav-link:hover{
+    color: #dee2e6;
+  }
+
+

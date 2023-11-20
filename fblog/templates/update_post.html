@@ -1,0 +1,31 @@
+{% extends "base.html"  %}
+
+{% block content %}
+<section class="py-5 bg-light">
+    <div class="container">
+        <section class="row">
+            <article class="col-12 col-md-7 mx-auto">
+                <div class="bg-white">
+                    <h3 class="p-4 text-center border-bottom">UPDATE POST</h3>
+                    <form action="" class="p-5" method="POST">
+                        {{form.hidden_tag()}}
+                        <div class="mb-3">
+                            {{form.title.label(class="")}}
+                            {{form.title(class="form-control form-control-lg", placeholder="your title")}}    
+                        </div>
+
+                        <div class="mb-3">
+                            {{form.content.label(class="form-label")}}
+                            {{form.content(class="form-control")}}    
+                        </div>
+
+                        <div>
+                            {{form.submit(class="btn btn-primary btn-lg col-12")}}
+                        </div>
+                    </form>
+                </div>
+            </article>
+        </section>
+    </div>
+</section>
+{% endblock %}
