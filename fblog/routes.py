@@ -57,8 +57,10 @@ def create_post():
             image_file = save_picture(form.image.data)
             print(image_file)
             post = Post(title=form.title.data, content=form.content.data, image=image_file, author=current_user)
-            db.session.add(post)
-            db.session.commit() 
+        else:
+            post = Post(title=form.title.data, content=form.content.data, author=current_user)
+        db.session.add(post)
+        db.session.commit() 
         flash(f'post created {form.title.data}', 'success')
         return redirect(url_for('index'))
     return render_template("create_post.html", form=form, title="new post")
@@ -82,6 +84,18 @@ def update_post(post_id):
         form.title.data = post.title
         form.content.data = post.content
     return render_template("update_post.html", form=form)
+
+
+#delete post route
+@app.route("/post/<int:post_id>/delete/", methods=["POST"])
+def delete_post(post_id):
+    post = Post.query.get_or_404(post_id)
+    if post.author != current_user:
+        abort(403)
+    db.session.delete(post)
+    db.session.commit()
+    flash(f"{post.title} has been deleted", 'success')
+    return redirect(url_for('index'))
 
 
 #login route
