@@ -42,6 +42,9 @@
                     {% endif %}
                     <p class="text-muted">{{post.date_posted.strftime('%d-%b-%Y')}}</p>
                 </div>
+                <div class="my-3">
+                    <img class=" img-fluid shadow w-100 rounded-5" src="/static/images/{{post.image}}" alt="" style="height: 400px; object-fit: cover;">
+                </div>
                 <div>
                     <p class="fs-4">
                         {{post.content}}
