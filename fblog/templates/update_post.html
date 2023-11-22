@@ -19,6 +19,18 @@
                             {{form.content(class="form-control")}}    
                         </div>
 
+                        <div class="mb-3">
+                            {{form.image.label(class="form-label")}}
+                            {{form.image(class="form-control form-control-file")}}
+
+                            {% if form.image.errors %}
+                                {% for error in form.image.errors %}
+                                    <span class="text-danger">{{error}}</span>
+                                {% endfor %}
+                            {% endif %}
+                            
+                        </div>
+
                         <div>
                             {{form.submit(class="btn btn-primary btn-lg col-12")}}
                         </div>
