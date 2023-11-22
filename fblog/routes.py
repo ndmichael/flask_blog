@@ -77,12 +77,15 @@ def update_post(post_id):
     if form.validate_on_submit():
         post.title = form.title.data
         post.content = form.content.data
+        post.image = save_picture(form.image.data)
         db.session.commit()
         flash(f"post updated", 'success')
         return redirect(url_for('post_details', id=post.id))
     else:
         form.title.data = post.title
         form.content.data = post.content
+        form.image.data = post.image
+        print(post.image)
     return render_template("update_post.html", form=form)
 
 
