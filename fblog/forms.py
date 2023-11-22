@@ -40,4 +40,5 @@ class CreatePost(FlaskForm):
 class UpdatePost(FlaskForm):
     title = StringField('Your Title', validators=[DataRequired(), Length(min=5, max=100) ])
     content = TextAreaField('Content', render_kw={'rows':7})
+    image = FileField('Post Image', validators=[FileAllowed(['jpg', 'png', 'svg'])])
     submit = SubmitField('UPDATE POST')
